@@ -655,9 +655,7 @@
   idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
   numpartitions = 7
   jsPsych.init({
-    //timeline: [practice_node,test_node],
     timeline: [practice_timeline_complete_node, test_node],
-    //timeline: [practice_node],
     
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
@@ -665,7 +663,7 @@
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
       window.parent.postMessage(jsPsych.data.dataAsCSV(), "*");
-      
+/*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
       var json_datas = [];
@@ -683,7 +681,6 @@
       var ridqid = 1913
       var url = `${base_url}3808247/surveyresponse.jsonp?_method=PUT&api_token=${api_key}&api_token_secret=${api_secret}&data[${ridqid}][value]=${rid}`;
 
-/*
       $.ajax({
           url: url,
           type: 'PUT',

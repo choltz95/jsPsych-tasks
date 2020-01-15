@@ -33,7 +33,6 @@
   var tti = 0;
 
   /* define instructions block */
-
   var instructions_block = {
     type: "text",
     cont_key: [70,74],
@@ -330,48 +329,48 @@
     }
   }
 
-    var practice_errcheck_timeline = [];
-    practice_errcheck_timeline.push(practice_debrief_block_error);
-    practice_errcheck_timeline.push(practice2_block);
-    //practice_errcheck_timeline.push(practice_debrief_block_end);
-    var practice_errcheck_node = {
-      type: "textTimed",
-      cont_key: null,
-      timeLeft: 30,
-      timeline: practice_errcheck_timeline,
-      conditional_function: function(){
-           var data = jsPsych.data.getData();
-           var correct = 0;
-           var incorrect = 0;
-           var noresponse = 0;
-           var arrayLength = data.length;
-           for (var i = 0; i < arrayLength; i++) {
-              if(data[i]['block'] == 'practice'){
-                if(data[i]['correct_response']=='correct') {
-                  correct += 1;
-                }
-                if(data[i]['correct_response']=='incorrect') {
-                  incorrect += 1;
-                }
-                if(data[i]['correct_response']=='noresponse') {
-                  noresponse += 1;
-                }
+  var practice_errcheck_timeline = [];
+  practice_errcheck_timeline.push(practice_debrief_block_error);
+  practice_errcheck_timeline.push(practice2_block);
+  //practice_errcheck_timeline.push(practice_debrief_block_end);
+  var practice_errcheck_node = {
+    type: "textTimed",
+    cont_key: null,
+    timeLeft: 30,
+    timeline: practice_errcheck_timeline,
+    conditional_function: function(){
+         var data = jsPsych.data.getData();
+         var correct = 0;
+         var incorrect = 0;
+         var noresponse = 0;
+         var arrayLength = data.length;
+         for (var i = 0; i < arrayLength; i++) {
+            if(data[i]['block'] == 'practice'){
+              if(data[i]['correct_response']=='correct') {
+                correct += 1;
               }
-           }
-           perror_rate = (noresponse+incorrect)/(correct+noresponse+incorrect);
+              if(data[i]['correct_response']=='incorrect') {
+                incorrect += 1;
+              }
+              if(data[i]['correct_response']=='noresponse') {
+                noresponse += 1;
+              }
+            }
+         }
+         perror_rate = (noresponse+incorrect)/(correct+noresponse+incorrect);
 
-          console.log('errcheck');
-          console.log(perror_rate);
+        console.log('errcheck');
+        console.log(perror_rate);
 
-          if(perror_rate >= 0.25){
-              console.log('accept');
-              return true;
-          } else {
-              console.log('reject');
-              return false;
-          }
-      }
+        if(perror_rate >= 0.25){
+            console.log('accept');
+            return true;
+        } else {
+            console.log('reject');
+            return false;
+        }
     }
+  }
 
   var practice_debrief2_timeline = [];
   practice_debrief2_timeline.push(practice_debrief_block_end);
@@ -415,46 +414,46 @@
   }
 
 
-    var practice_errcheck2_timeline = [];
-    practice_errcheck2_timeline.push(practice_debrief_block_error2);
-    var practice_errcheck2_node = {
-      type: "textTimed",
-      cont_key: null,
-      timeLeft: 30,
-      timeline: practice_errcheck2_timeline,
-      conditional_function: function(){
-           var data = jsPsych.data.getData();
-           var correct = 0;
-           var incorrect = 0;
-           var noresponse = 0;
-           var arrayLength = data.length;
-           for (var i = 0; i < arrayLength; i++) {
-              if(data[i]['block'] == 'practice2'){ // practice 2
-                if(data[i]['correct_response']=='correct') {
-                  correct += 1;
-                }
-                if(data[i]['correct_response']=='incorrect') {
-                  incorrect += 1;
-                }
-                if(data[i]['correct_response']=='noresponse') {
-                  noresponse += 1;
-                }
+  var practice_errcheck2_timeline = [];
+  practice_errcheck2_timeline.push(practice_debrief_block_error2);
+  var practice_errcheck2_node = {
+    type: "textTimed",
+    cont_key: null,
+    timeLeft: 30,
+    timeline: practice_errcheck2_timeline,
+    conditional_function: function(){
+         var data = jsPsych.data.getData();
+         var correct = 0;
+         var incorrect = 0;
+         var noresponse = 0;
+         var arrayLength = data.length;
+         for (var i = 0; i < arrayLength; i++) {
+            if(data[i]['block'] == 'practice2'){ // practice 2
+              if(data[i]['correct_response']=='correct') {
+                correct += 1;
               }
-           }
-           perror_rate = (noresponse+incorrect)/(correct+noresponse+incorrect);
+              if(data[i]['correct_response']=='incorrect') {
+                incorrect += 1;
+              }
+              if(data[i]['correct_response']=='noresponse') {
+                noresponse += 1;
+              }
+            }
+         }
+         perror_rate = (noresponse+incorrect)/(correct+noresponse+incorrect);
 
-          console.log('errcheck');
-          console.log(perror_rate);
+        console.log('errcheck');
+        console.log(perror_rate);
 
-          if(perror_rate >= 0.25){
-              console.log('accept');
-              return true;
-          } else {
-              console.log('reject');
-              return false;
-          }
-      }
+        if(perror_rate >= 0.25){
+            console.log('accept');
+            return true;
+        } else {
+            console.log('reject');
+            return false;
+        }
     }
+  }
 
   var practice2_timeline = [];
   practice2_timeline.push(practice2_block);
@@ -647,9 +646,8 @@
   }
 
   /* start the experiment */
-  jsPsych.init({ // after practice2_node do practice2_errcheck_node
+  jsPsych.init({
     timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
-    //timeline: [practice_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
