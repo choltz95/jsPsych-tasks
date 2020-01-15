@@ -4,16 +4,18 @@
     <title>Color-Naming-Stroop</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="jspsych-5.0.3/jspsych.js"></script>
-    <script src="https://choltz95.github.io/projects/jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="../shared/jspsych-5.0.3/plugins/jspsych-text.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-textTimed.js"></script>
-    <script src="https://choltz95.github.io/projects/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <script src="../shared/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
     <script src="../shared/utils.js"></script>
-    <link href="https://choltz95.github.io/projects/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    <link href="../shared/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link href="style.css" rel="stylesheet" type="text/css"></link>
   </head>
   <body>
     <div style='text-align:center; font-size: 80%; position=fixed; bottom=0; width=100%;'><br>KEYS FOR TASK: <br> <font color='red'>F=RED</font>, <font color='blue'>J=BLUE</font></div>
-    <div class="jspsych_target" id="jspsych_target"></div>
+    <div class="jspsych_target" id="jspsych_target">
+      <div class="instructions" id="instructions"></div>
+    </div>
   </body>
   <script>
 
@@ -598,7 +600,7 @@
     type: "single-stim",
     timeline: test_timeline
   }
-  
+
   var rid = getParameterByName('rid');
   console.log(rid);
 

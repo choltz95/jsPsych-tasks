@@ -43,3 +43,28 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+function resizeDisplay() {
+    function isOverflowing(el){
+        return el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth;
+    }
+    var eye = document.getElementById("instructions");
+    var fontSize = parseInt(eye.style.fontSize);
+    var paddingAbove = parseInt(eye.style.paddingTop);
+
+    for (var i=fontSize; i>=0; i--){
+        var overflow = isOverflowing(eye);
+        if (overflow) {
+            fontSize--;
+            paddingAbove += 0.41;
+            eye.style.fontSize = fontSize + "px";
+            eye.style.paddingTop = paddingAbove + "px";
+        }
+    }
+}
+
+function resetDisplay() {
+    var eye = document.getElementById("instructions");
+    eye.style.fontSize = "125%";
+    eye.style.paddingTop = "1pt";
+}
