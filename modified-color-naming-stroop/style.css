@@ -1,0 +1,13 @@
+body { font-size: 125%; } /* global font size */
+#go {
+  width: 30%;
+  height: 80px;
+  margin: 0 auto;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: red;
+}
+.jspsych-display-element h1 {
+  width: 50%;
+}

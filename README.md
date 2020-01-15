@@ -2,9 +2,10 @@
 
 Three tasks designed by the UR YR2 lab implemented in JS using the JsPsych API [https://www.jspsych.org/] + Princeton Timed Text Plugin [https://github.com/PrincetonUniversity/prsonlab/wiki/jsPsych-Plugins#jspsych-text-timed]
 
-### Instructions:
+### Instructions [terminal] \& dependencies:
 
-Ensure python is installed [doesn't matter what version, just need for HttpServer - otherwise do \*]
+ - Python [2,7 / 3, just need for HttpServer - otherwise do \*]
+ - JsPsych 5.0.3 [submodule]
 
 Clone this repository
 ```

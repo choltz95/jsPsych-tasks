@@ -37,7 +37,7 @@ var jsPsych = (function() {
     current_trial = {};
 
     // check if there is a body element on the page
-    var default_display_element = $('body');
+    var default_display_element = $('#jspsych_target');
     if (default_display_element.length === 0) {
       $(document.documentElement).append($('<body>'));
       default_display_element = $('body');
@@ -548,7 +548,7 @@ var jsPsych = (function() {
       DOM_target.html(timeline.end_message);
     }
 
-    if (document.exitFullscreen) {
+    /*if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.msExitFullscreen) {
       document.msExitFullscreen();
@@ -556,7 +556,7 @@ var jsPsych = (function() {
       document.mozCancelFullScreen();
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
-    }
+    }*/
 
   }
 

@@ -3,43 +3,44 @@
   <head>
     <title>Color-Naming-Stroop</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!--<script src="https://choltz95.github.io/projects/jspsych-5.0.3/jspsych.js"></script>-->
     <script src="jspsych-5.0.3/jspsych.js"></script>
     <script src="https://choltz95.github.io/projects/jspsych-5.0.3/plugins/jspsych-text.js"></script>
-    <!--<script src="https://choltz95.github.io/projects/jspsych-5.0.3/plugins/jspsych-textTimed.js"></script>-->
     <script src="jspsych-5.0.3/plugins/jspsych-textTimed.js"></script>
     <script src="https://choltz95.github.io/projects/jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <script src="../shared/utils.js"></script>
     <link href="https://choltz95.github.io/projects/jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-    <style>
-      body { font-size: 125%; } /* global font size */
-      #go {
-        width: 30%;
-        height: 80px;
-        margin: 0 auto;
-        -webkit-border-radius: 25px;
-        -moz-border-radius: 25px;
-        border-radius: 25px;
-        background: red;
-      }
-      .jspsych-display-element h1 {
-        width: 50%;
-      }
-    </style>
+    <link href="style.css" rel="stylesheet" type="text/css"></link>
   </head>
   <body>
     <div style='text-align:center; font-size: 80%; position=fixed; bottom=0; width=100%;'><br>KEYS FOR THIS TASK: <br> <font color='FF0000'>F=RED</font>, <font color='0000FF'>J=BLUE</font></div>
     <div id="jspsych_target" style="text-align:left;"></div>
   </body>
   <script>
+
+  var colors = ["blue", "red"];
+  var practice_wordlist = ["ZZZZZ","BBBBB","VVVVV","WWWWW","SSSSS","NNNNN","QQQQQ","UUUUU","HHHHH","IIIII","DDDDD","PPPPP"];
+  var practice2_wordlist = ["CCCCC","EEEEE","XXXXX","MMMMM","AAAAA","LLLLL","RRRRR","TTTTT","KKKKK","GGGGG","OOOOO","YYYYY"];
+  var suicide_wordlist = ["suicide","die","funeral","overdose","drowning","poisoning","dead","lifeless","disappear","jumping","fatal","hanging","cutting","escape","deadly","dying","crisis","lethal","death","suicidal"];
+  var negative_wordlist = ["alone","rejected","pathetic","worthless","lonely","worried","numb","gloomy","frightened","miserable","crying","failure","hurting","disappointing","pain","stupid","ugly","fear","disgust","anger"];
+  var neutral_wordlist = ["dresser","shelf","cupboard","closet","laundry","drawer","oven","stool","sofa","couch","cabinet","dishwasher","chair","bench","bed","towel","shower","window","carpet","curtains"];
+
+  var test_wordlist = {'suicide':suicide_wordlist, 'negative':negative_wordlist,'neutral':neutral_wordlist};
+  var practice_stimuli = [];
+  var practice2_stimuli = [];
+  var test_stimuli = []; // blocks
+  var trial_index = 0;
+  var test_trial_index = 0;
+  var tti = 0;
+
   /* define instructions block */
 
   var instructions_block = {
     type: "text",
     cont_key: [70,74],
-    text: "<p>In this task, you will see a series of words appear on the screen. During each trial, a word will appear in either <font color='red'>red</font> or <font color='blue'>blue</font>. If the word is in <font color='blue'>blue</font>, press the ‘<font color='blue'>J</font>’ key on the keyboard. If the word is in <font color='red'>red</font>, press the ‘<font color='red'>F</font>’ key on the keyboard. A ‘+’ will appear on the screen before each word to show you where to look.</p>" +
-           "<p>Your task is to indicate the color of each word (by pressing the ‘<font color='red'>F</font>’ or ‘<font color='blue'>J</font>’ keys on the keyboard) as quickly and as accurately as you can. Try to not make mistakes, but try to be fast. Your responses will be timed.</p>" +
+    text: "<p>In this task, you will see a series of words appear on the screen. During each trial, a word will appear in either <font color='red'>red</font> or <font color='blue'>blue</font>. If the word is in <font color='blue'>blue</font>, press the '<font color='blue'>J</font>' key on the keyboard. If the word is in <font color='red'>red</font>, press the '<font color='red'>F</font>' key on the keyboard. A '+' will appear on the screen before each word to show you where to look.</p>" +
+           "<p>Your task is to indicate the color of each word (by pressing the '<font color='red'>F</font>' or '<font color='blue'>J</font>' keys on the keyboard) as quickly and as accurately as you can. Try to not make mistakes, but try to be fast. Your responses will be timed.</p>" +
            "<p>First, you will be presented with a set of practice trials that can be repeated, if needed. Next, you will be presented with the test trials that cannot be repeated. The task will take less than 10 minutes to complete.</p>" +
-           "<p>Press the ‘<font color='red'>F</font>’ or ‘<font color='blue'>J</font>’ key to start…</p>",
+           "<p>Press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to start…</p>",
     timing_post_trial: 4000
   };
 
@@ -55,22 +56,6 @@
       correct_response: ''
     }
   };
-
-  /* define test blocks */
-  var colors = ["blue", "red"];
-  var practice_wordlist = ["ZZZZZ","BBBBB","VVVVV","WWWWW","SSSSS","NNNNN","QQQQQ","UUUUU","HHHHH","IIIII","DDDDD","PPPPP"];
-  var practice2_wordlist = ["CCCCC","EEEEE","XXXXX","MMMMM","AAAAA","LLLLL","RRRRR","TTTTT","KKKKK","GGGGG","OOOOO","YYYYY"];
-  var suicide_wordlist = ["suicide","die","funeral","overdose","drowning","poisoning","dead","lifeless","disappear","jumping","fatal","hanging","cutting","escape","deadly","dying","crisis","lethal","death","suicidal"];
-  var negative_wordlist = ["alone","rejected","pathetic","worthless","lonely","worried","numb","gloomy","frightened","miserable","crying","failure","hurting","disappointing","pain","stupid","ugly","fear","disgust","anger"];
-  var neutral_wordlist = ["dresser","shelf","cupboard","closet","laundry","drawer","oven","stool","sofa","couch","cabinet","dishwasher","chair","bench","bed","towel","shower","window","carpet","curtains"];
-  //var test_wordlist =  suicide_wordlist.concat(negative_wordlist, positive_wordlist, neutral_wordlist)
-  var test_wordlist = {'suicide':suicide_wordlist, 'negative':negative_wordlist,'neutral':neutral_wordlist};
-  var practice_stimuli = [];
-  var practice2_stimuli = [];
-  var test_stimuli = []; // blocks
-  var trial_index = 0;
-  var test_trial_index = 0;
-  var tti = 0;
 
   var practice_colors = jsPsych.randomization.repeat(colors, 6);
   for(var i=0;i<practice_wordlist.length;i++) {
@@ -103,7 +88,7 @@
             color: color,
             block: 'practice2',
             block_num: 0,
-            word_type: 'practice2'
+            word_type: 'practice'
           }
     }
     practice2_stimuli.push(stim2);
@@ -162,10 +147,9 @@
 
   var practice_block = {
     type: "single-stim",
-    //choices: ['f','j'],
-    choices: [],
+    choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1500,
+    timing_post_trial: 1000,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData();
@@ -197,10 +181,9 @@
 
   var practice2_block = {
     type: "single-stim",
-    //choices: ['f','j'],
-    choices: [],
+    choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1500,
+    timing_post_trial: 1000,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData();
@@ -230,21 +213,30 @@
     timeline: practice2_trials
   };
 
-  var practice_debrief_block = {
+  /*var practice_debrief_block = {
     type: "text",
     cont_key: [49,70,74],
     text: function() {
-      return "<p>Great job, you’ve just completed the practice trials! If you would like to repeat the practice trials, please press <b>1</b>. If you would like to continue on to the task, please press the ‘<font color='red'>F</font>’ or ‘<font color='blue'>J</font>’ keys to start.</p>" +
-             "<br><p><b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard.</p>";
+      return "<p>Great job, you've just completed the practice trials! If you would like to repeat the practice trials, please press <b>1</b>. If you would like to continue on to the task, please press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' keys to start.</p>" +
+             "<br><p><b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</p>";
     }
+  };*/
+    var practice_debrief_block = {
+    type: "text",
+    cont_key: [49,70,74],
+    text: function() {
+      return "<p>You have completed the PRACTICE phase. If you would like to repeat the practice trials, please press <b>1</b>. If you would like to continue onto the TEST phase, press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key on the keyboard.</p>" + 
+        "<br><p><b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</p>";
+      }
   };
 
   var practice_debrief_block_error = {
     type: "text",
     cont_key: [70,74],
     text: function() {
-      return "<p>It looks like you're having trouble with the task. Please press the ‘<font color='red'>F</font>’ or ‘<font color='blue'>J</font>’ key to try the practice again.</p>" +
-              "<br><p><b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard.</p>";
+      return "<p>It looks like you're having trouble with the task. Remember, if the word is in <font color='red'>red</font>, press the '<font color='red'>F</font>' key on the keyboard.  If the word is in <font color='blue'>blue</font>, press the '<font color='blue'>J</font>' key on the keyboard.</p>" +
+              "<br><p>Please press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to try the practice again.</p>" +
+              "<br><p><b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</p>";
     }
   };
 
@@ -252,8 +244,9 @@
     type: "text",
     cont_key: [70,74],
     text: function() {
-      return "<p>It looks like you might be having trouble with the task and it may be helpful to check what keys you’re pressing. Remember, if the word is in <font color='red'>red</font>, press the ''<font color='red'>F</font>'' key on the keyboard.  If the word is in <font color='blue'>blue</font>, press the ''<font color='blue'>J</font>'' key.</p>" +
-             "<br><p><b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard.</p>";
+      return "<p>It looks like you might be having trouble with the task and it may be helpful to check what keys you're pressing. Remember, if the word is in <font color='red'>red</font>, press the '<font color='red'>F</font>' key on the keyboard.  If the word is in <font color='blue'>blue</font>, press the '<font color='blue'>J</font>' key on the keyboard.</p>" +
+        "<br><p>Please press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to move onto the TEST phase.</p>" +
+        "<br><p><b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</p>";
     }
   };
 
@@ -261,8 +254,8 @@
     type: "text",
     cont_key: [70,74],
     text: function() {
-      return "<p>You have completed the PRACTICE phase. If you would like to continue onto the TEST phase, press the ‘<font color='red'>F</font>’ or ‘<font color='blue'>J</font>’ key on the keyboard.</p>" +
-             "<br><p><b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard.</p>";
+      return "<p>You have completed the PRACTICE phase. If you would like to continue onto the TEST phase, press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key on the keyboard.</p>" + 
+        "<br><p><b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</p>";
     }
   };
 
@@ -323,12 +316,11 @@
             }
          }
          perror_rate = (noresponse+incorrect)/(correct + noresponse+incorrect);
-         console.log('perror')
-         console.log(perror_rate)
+
         console.log('debrief');
         console.log(perror_rate);
 
-        if(perror_rate < 0.75){
+        if(perror_rate < 0.25){
             console.log('accept');
             return true;
         } else {
@@ -371,7 +363,7 @@
           console.log('errcheck');
           console.log(perror_rate);
 
-          if(perror_rate >= 0.75){
+          if(perror_rate >= 0.25){
               console.log('accept');
               return true;
           } else {
@@ -412,7 +404,7 @@
         console.log('debrief');
         console.log(perror_rate);
 
-        if(perror_rate < 0.75){
+        if(perror_rate < 0.25){
             console.log('accept');
             return true;
         } else {
@@ -454,7 +446,7 @@
           console.log('errcheck');
           console.log(perror_rate);
 
-          if(perror_rate >= 0.75){
+          if(perror_rate >= 0.25){
               console.log('accept');
               return true;
           } else {
@@ -508,10 +500,9 @@
 
   var test_block1 = {
     type: "single-stim",
-    //choices: ['f','j'],
-    choices: [],
+    choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1500,
+    timing_post_trial: 1000,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -544,10 +535,9 @@
 
   var test_block2 = {
     type: "single-stim",
-    //choices: ['f','j'],
-    choices: [],
+    choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1500,
+    timing_post_trial: 1000,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -580,10 +570,9 @@
 
   var test_block3 = {
     type: "single-stim",
-    //choices: ['f','j'],
-    choices: [],
+    choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1500,
+    timing_post_trial: 1000,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -622,23 +611,24 @@
       tti++;
       //return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed " + (Math.round(test_trial_index/60)).toString() + " sets of trials. You have " + (3 - Math.round(test_trial_index/60)).toString() + " sets of trials to go.</div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
       if (tti == 1) {
-        return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed " + (tti).toString() + " set of trials. You have " + (3 - tti).toString() + " sets of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard. </div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
+        return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed " + (tti).toString() + " set of trials. You have " + (3 - tti).toString() + " sets of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard. </div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
       } else if (tti == 2) {
-        return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You have " + (3 - tti).toString() + " more set of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard.</div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
+        return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You have " + (3 - tti).toString() + " more set of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard.</div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
       } else {
-          return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed " + (tti).toString() + " sets of trials. You have " + (3 - tti).toString() + " sets of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the ‘<font color='red'>F</font>’ and ‘<font color='blue'>J</font>’ keys on the keyboard. </div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
+          return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed " + (tti).toString() + " sets of trials. You have " + (3 - tti).toString() + " sets of trials to go. <br> <br> <b>Remember</b>: make sure your fingers are on the '<font color='red'>F</font>' and '<font color='blue'>J</font>' keys on the keyboard. </div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
       }
     }
   };
 
   var test_debrief_block = {
     type: "textTimed",
-    timeLeft: 0,
-    text: function() {
-      jsPsych.data.localSave('data.csv', 'csv');
+    cont_key: null,
+    timeLeft: 1,
 
+    text: function() {
       console.log('done');
-      return "<div style='text-align:center;'><p>Thank you for completing the task!</p></div>"
+      return "<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>"
+      return "";
     }
   };
 
@@ -659,11 +649,12 @@
   /* start the experiment */
   jsPsych.init({ // after practice2_node do practice2_errcheck_node
     timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
-
+    //timeline: [practice_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
-
-      console.log('done done');
+      console.log('done');
+      $('.jspsych-target').append("<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>");
+      window.parent.postMessage(jsPsych.data.dataAsCSV(), "*");
     }
   });
 
