@@ -1,0 +1,13 @@
+UCLA nodes 1.0
+
+#Created    :
+#Created by :
+
+NumNodes : 5
+NumTerminals : 0
+
+C1        5        5
+C10       5        2
+C100      5        2
+C101      5        2
+C102      5        2
