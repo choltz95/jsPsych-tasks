@@ -31,6 +31,7 @@
   var trial_index = 0;
   var test_trial_index = 0;
   var tti = 0;
+  var test_flag = true;
 
   /* define instructions block */
   var instructions_block = {
@@ -39,7 +40,7 @@
     text: "<p>In this task, you will see a series of words appear on the screen. During each trial, a word will appear in either <font color='red'>red</font> or <font color='blue'>blue</font>. If the word is in <font color='blue'>blue</font>, press the '<font color='blue'>J</font>' key on the keyboard. If the word is in <font color='red'>red</font>, press the '<font color='red'>F</font>' key on the keyboard. A '+' will appear on the screen before each word to show you where to look.</p>" +
            "<p>Your task is to indicate the color of each word (by pressing the '<font color='red'>F</font>' or '<font color='blue'>J</font>' keys on the keyboard) as quickly and as accurately as you can. Try to not make mistakes, but try to be fast. Your responses will be timed.</p>" +
            "<p>First, you will be presented with a set of practice trials that can be repeated, if needed. Next, you will be presented with the test trials that cannot be repeated. The task will take less than 10 minutes to complete.</p>" +
-           "<p>Press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to start…</p>",
+           "<p>Press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to start...</p>",
     timing_post_trial: 4000
   };
 
@@ -278,7 +279,6 @@
     type: "single-stim",
     timeline: practice_timeline,
     on_finish: function(data){
-
       /*
       if(49 == data[data.length-2].key_press) {
         return true;
@@ -412,7 +412,6 @@
         }
     }
   }
-
 
   var practice_errcheck2_timeline = [];
   practice_errcheck2_timeline.push(practice_debrief_block_error2);
@@ -625,8 +624,7 @@
     timeLeft: 1,
 
     text: function() {
-      console.log('done');
-      return "<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>"
+      //return "<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>"
       return "";
     }
   };
@@ -651,39 +649,9 @@
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
-      $('.jspsych-target').append("<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>");
+      $('.jspsych-display-element').append("<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>");
       window.parent.postMessage(jsPsych.data.dataAsCSV(), "*");
     }
   });
-
-  function startTimer(duration, display) {
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        // get the number of seconds that have elapsed since
-        // startTimer() was called
-        diff = duration - (((Date.now() - start) / 1000) | 0);
-
-        // does the same job as parseInt truncates the float
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (diff <= 0) {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
-        }
-    };
-    // we don't want to wait a full second before the timer starts
-    timer();
-    setInterval(timer, 1000);
-}
 </script>
 </html>

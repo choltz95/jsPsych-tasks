@@ -4,7 +4,7 @@ Three tasks designed by the UR YR2 lab implemented in JS using the JsPsych API [
 
 ### Instructions [terminal] \& dependencies:
 
- - Python [2,7 / 3, just need for HttpServer - otherwise do \*]
+ - Python [2.7 / 3. Needed for HttpServer - otherwise do \*]
  - JsPsych 5.0.3 [submodule]
 
 Clone this repository
