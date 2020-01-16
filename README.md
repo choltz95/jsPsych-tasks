@@ -39,6 +39,8 @@ Task 3. Attention cueing stroop: fixation & dot & word blocks response dependant
 
 Some nonstandard fixes are applied to JsPsych. These tasks may not work with the officially supported JsPsych API.
 
+Some poor scaling of fonts and boxes in embedded IFrames - included iframe.html for diagnosis. 
+
 ### Notes on embedding tasks:
 
 Embedding tasks in SurveyGizmo has no official support. It is done via API and forced delay.
