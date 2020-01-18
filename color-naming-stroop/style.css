@@ -1,4 +1,18 @@
-body { font-size: 125%; } /* global font size */
+body { font-size: 70%; } /* global font size */
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+.instructions {
+  text-align: left;
+}
+
+
 #go {
   width: 30%;
   height: 80px;
@@ -10,4 +24,25 @@ body { font-size: 125%; } /* global font size */
 }
 .jspsych-display-element h1 {
   width: 50%;
+}
+
+.side-ind {
+  text-align:center; 
+  font-size: 80%; 
+  position: fixed;
+  width: 100%;
+}
+
+
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 75%; 
+  } 
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 125%; 
+  } 
 }
