@@ -21,6 +21,10 @@ body { font-size: 70%; } /* global font size */
   width: 100%;
 }
 
+.jspsych-display-element {
+  width: 100%;
+}
+
 .jspsych_target {
   text-align: center;
   width: 100%;
@@ -110,6 +114,8 @@ body { font-size: 70%; } /* global font size */
 
 .instructions {
   text-align: left;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 @media screen and (min-width: 480px) {

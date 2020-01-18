@@ -45,6 +45,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
       $(".spacer").css('display','none'); 
     },
     on_finish: function() { 
+      $(".instructions").css('display','none');
       $(".side-ind").css('display','block'); 
       $(".side-ind").css('visibility','visible');  
       $(".fixation_gap").css('display','block'); 
