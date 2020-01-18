@@ -72,7 +72,7 @@ body { font-size: 80%; } /* global font size */
   top: 100%;
 }
 .jspsych-display-element {
-  min-height: 75%;
+  min-height: 100%;
   min-width: 100%;
   width:100%; !important;
   /* overflow: hidden; */
