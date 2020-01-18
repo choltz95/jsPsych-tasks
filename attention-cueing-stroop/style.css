@@ -1,8 +1,26 @@
-  html, body {
+html, body {
   height: 100%;
   margin: 0;
-  }
-body { font-size: 125%; } /* global font size */
+}
+
+body { font-size: 80%; } /* global font size */
+
+.side-ind {
+  text-align:center; 
+  font-size: 80%; 
+  position: fixed; 
+  width: 100%; 
+  visibility: hidden;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
 .box1 {
   display: inline-block;
   vertical-align: middle;
@@ -10,16 +28,12 @@ body { font-size: 125%; } /* global font size */
   align-items: center;
   text-align: center;
   position: relative;
-  /*
-  width: 300px;
-  height: 400px;*/
-  
   width: 25%;
-  height: 65%;
-  
+  height: 50%;
   padding: 1px;
   margin: 2em;
   border: 3px solid grey;
+  word-wrap: break-word;
 }
 .box2 {
   display: inline-block;
@@ -28,13 +42,12 @@ body { font-size: 125%; } /* global font size */
   align-items: center;
   text-align: center;
   position: relative;
-  /*width: 300px;
-  height: 400px;*/
   width: 25%;
-  height: 65%;
+  height: 50%;
   padding: 1px;
   margin: 2em;
-  border: 3px solid grey
+  border: 3px solid grey;
+  word-wrap: break-word;
 }
 .fixation_gap {
   display: inline-block;
@@ -46,29 +59,34 @@ body { font-size: 125%; } /* global font size */
   position: relative;
   text-align:center;
   font-size: 40px;
-  margin: 2em;
+  margin: 1em;
+  flex-shrink: 3;
 }
 .dot {
   display: inline-block;
   vertical-align: middle;
   Text-align:center;
-  /*line-height: 400px;*/
 }
 .text {
   vertical-align: middle;
   top: 100%;
 }
 .jspsych-display-element {
-  min-height: 100%;
-  min-width:100%;
+  min-height: 75%;
+  min-width: 100%;
   width:100%; !important;
-  overflow: hidden;
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .box1 #jspsych-single-stim-stimulus, .box2 #jspsych-single-stim-stimulus {
   width: 100%;
   height: 100%;
   display:flex;
+  flex-direction: row;
   justify-content:center;
   align-items:center;
 }
@@ -83,4 +101,16 @@ body { font-size: 125%; } /* global font size */
 }
 .jspsych-display-element h1 {
   width: 50%;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 100%; 
+  } 
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 125%; 
+  } 
 }
