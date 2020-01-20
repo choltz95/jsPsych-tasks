@@ -67,8 +67,12 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     timing_response: 1000,
     timing_post_trial: 0,
     response_ends_trial: false,
-    on_trial_start: function() { $(".fixation_gap").css('visibility','visible'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','hidden'); },
+    on_trial_start: function() { 
+      $(".fixation_gap").css('visibility','visible'); 
+    },
+    on_finish: function() { 
+      $(".fixation_gap").css('visibility','hidden'); 
+    },
     data:{
       block: 'fixation'
     }
@@ -231,12 +235,14 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     type: "text",
     cont_key: [49,70,74],
     display_element: $('.instructions'),
-    on_trial_start: function() { 
+    on_trial_start: function() {
+      $(".instructions").css('display','block');
       $(".fixation_gap").css('display','none'); 
       $(".box1").css('display','none'); 
       $(".box2").css('display','none');
     },
     on_finish: function() { 
+      $(".instructions").css('display','none');
       $(".fixation_gap").css('display','block'); 
       $(".box1").css('display','block'); 
       $(".box2").css('display','block');
@@ -256,14 +262,16 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     cont_key: [70,74],
     display_element: $('.instructions'),
     on_trial_start: function() { 
-      $(".fixation_gap").css('visibility','hidden'); 
-      $(".box1").css('visibility','hidden'); 
-      $(".box2").css('visibility','hidden'); 
+      $(".instructions").css('display','block');
+      $(".fixation_gap").css('display','none'); 
+      $(".box1").css('display','none'); 
+      $(".box2").css('display','none');
     },
     on_finish: function() { 
-      $(".fixation_gap").css('visibility','visible'); 
-      $(".box1").css('visibility','visible'); 
-      $(".box2").css('visibility','visible');  
+      $(".instructions").css('display','none');
+      $(".fixation_gap").css('display','block'); 
+      $(".box1").css('display','block'); 
+      $(".box2").css('display','block');
     },
     text: function() {
       return "<p>It looks like you're having trouble with the task. Let’s try the practice again. Remember, if the ''&#9679;'' is on the left side of the screen, press the '<b>F</b>' key on the keyboard. If the ''&#9679;'' is on the right side of the screen, press the '<b>J</b>' key on the keyboard.</p>" +
@@ -277,14 +285,16 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     cont_key: [70,74],
     display_element: $('.instructions'),
     on_trial_start: function() { 
-      $(".fixation_gap").css('visibility','hidden'); 
-      $(".box1").css('visibility','hidden'); 
-      $(".box2").css('visibility','hidden'); 
+      $(".instructions").css('display','block');
+      $(".fixation_gap").css('display','none'); 
+      $(".box1").css('display','none'); 
+      $(".box2").css('display','none');
     },
     on_finish: function() { 
-      $(".fixation_gap").css('visibility','visible'); 
-      $(".box1").css('visibility','visible'); 
-      $(".box2").css('visibility','visible');  
+      $(".instructions").css('display','none');
+      $(".fixation_gap").css('display','block'); 
+      $(".box1").css('display','block'); 
+      $(".box2").css('display','block'); 
     },
     text: function() {
       return "<p>It looks like you're having trouble with the task and it may be helpful to check what keys you're pressing. Remember, if the ''&#9679;'' is on the left side of the screen, press the '<b>F</b>' key on the keyboard. If the ''&#9679;'' is on the right side of the screen, press the '<b>J</b>' key on the keyboard.</p>" +
@@ -298,14 +308,16 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     cont_key: [49,70,74],
     display_element: $('.instructions'),
     on_trial_start: function() { 
-      $(".fixation_gap").css('visibility','hidden'); 
-      $(".box1").css('visibility','hidden'); 
-      $(".box2").css('visibility','hidden'); 
+      $(".instructions").css('display','block');
+      $(".fixation_gap").css('display','none'); 
+      $(".box1").css('display','none'); 
+      $(".box2").css('display','none');
     },
     on_finish: function() { 
-      $(".fixation_gap").css('visibility','visible'); 
-      $(".box1").css('visibility','visible'); 
-      $(".box2").css('visibility','visible');  
+      $(".instructions").css('display','none');
+      $(".fixation_gap").css('display','block'); 
+      $(".box1").css('display','block'); 
+      $(".box2").css('display','block'); 
     },
     text: function() {
       return "<p>You have completed the PRACTICE phase.  If you would like to repeat the PRACTICE phase, press 1. To continue onto the TEST phase, press the '<b>F</b>' or '<b>J</b>' keys on the keyboard.</p>" + 
@@ -336,14 +348,16 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     timing_post_trial: 500,
     display_element: $('.instructions'),
     on_trial_start: function() { 
-      $(".fixation_gap").css('visibility','hidden'); 
-      $(".box1").css('visibility','hidden'); 
-      $(".box2").css('visibility','hidden'); 
+      $(".instructions").css('display','block');
+      $(".fixation_gap").css('display','none'); 
+      $(".box1").css('display','none'); 
+      $(".box2").css('display','none');
     },
     on_finish: function() { 
-      $(".fixation_gap").css('visibility','visible'); 
-      $(".box1").css('visibility','visible'); 
-      $(".box2").css('visibility','visible');
+      $(".instructions").css('display','none');
+      $(".fixation_gap").css('display','block'); 
+      $(".box1").css('display','block'); 
+      $(".box2").css('display','block'); 
     },
     text: function() {
         return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed the first half of the task!" +
