@@ -12,7 +12,7 @@ Clone this repository
 git clone --recurse-submodules https://github.com/choltz95/jsPsych-tasks.git
 ```
 
-Instantiate an instance of PyServer(\*since the tasks are written in pure JS, you can also open Index.html files in your browser.)
+Instantiate an instance of PyServer(\* since the tasks are written in pure JS, you can also open Index.html files in your browser.)
 ```
 ./serve
 ```
