@@ -60,8 +60,8 @@
       "<p>First, you will be presented with a set of practice trials that can be repeated, if needed. Then, you will be presented with the test trials that cannot be repeated. The task will take approximately 10 minutes to complete.</p>" +
 
       "<p>Press the '<b>F</b>' or '<b>J</b>' key to start...</p>",
-    on_trial_start: function() {$(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".side-ind").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');  },
+    on_trial_start: function() {$(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); $(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto');},
+    on_finish: function() { $(".side-ind").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible'); $(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0');},
     timing_post_trial: 4000
   };
 
@@ -233,8 +233,8 @@
     type: "text",
     cont_key: [49,70,74],
     display_element: $('.instructions'),
-    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible'); $("jspsych-single-stim-stimulus").css('visibility','visible') },
+    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden');$(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto');},
+    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible'); $("jspsych-single-stim-stimulus").css('visibility','visible');$(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0');},
     text: function() {
       return "<p>You have completed the PRACTICE phase. If you would like to repeat the PRACTICE phase, press <b>1</b>. To continue onto the TEST phase, press the '<b>F</b>' or '<b>J</b>' keys on the keyboard.</p>" + 
              "<br><p><b>Remember</b>: press the '<b>F</b>' key if the ''&#9679;'' is on the left. Press the '<b>J</b>' key if the ''&#9679;'' is on the right.</p>";
@@ -245,8 +245,8 @@
     type: "text",
     cont_key: [70,74],
     display_element: $('.instructions'),
-    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');  },
+    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden');$(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto');},
+    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');$(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0');},
     text: function() {
       return "<p>It looks like you're having trouble with the task. Let’s try the practice again. Remember, if the ''&#9679;'' is on the left side of the screen, press the '<b>F</b>' key on the keyboard. If the ''&#9679;'' is on the right side of the screen, press the '<b>J</b>' key on the keyboard.</p>" +
               "<br><p>Please press the '<b>F</b>' or '<b>J</b>' key to try the practice again.</p>" +
@@ -258,8 +258,8 @@
     type: "text",
     cont_key: [70,74],
     display_element: $('.instructions'),
-    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');  },
+    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden');$(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto'); },
+    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');$(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0'); },
     text: function() {
       return "<p>It looks like you're having trouble with the task and it may be helpful to check what keys you're pressing. Remember, if the ''&#9679;'' is on the left side of the screen, press the '<b>F</b>' key on the keyboard. If the ''&#9679;'' is on the right side of the screen, press the '<b>J</b>' key on the keyboard.</p>" +
         "<br><p>Please press the '<b>F</b>' or '<b>J</b>' key to move onto the TEST phase.</p>" +
@@ -271,8 +271,8 @@
     type: "text",
     cont_key: [49,70,74],
     display_element: $('.instructions'),
-    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');  },
+    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden');$(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto'); },
+    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');$(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0');  },
     text: function() {
       return "<p>You have completed the PRACTICE phase.  If you would like to repeat the PRACTICE phase, press 1. To continue onto the TEST phase, press the '<b>F</b>' or '<b>J</b>' keys on the keyboard.</p>" + 
         "<br><p><b>Remember</b>: make sure your fingers are on the '<b>F</b>' and '<b>J</b>' keys on the keyboard.</p>";
@@ -301,8 +301,8 @@
     timeLeft: 30,
     timing_post_trial: 500,
     display_element: $('.instructions'),
-    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden'); },
-    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');},
+    on_trial_start: function() { $(".fixation_gap").css('visibility','hidden'); $(".box1").css('visibility','hidden'); $(".box2").css('visibility','hidden');$(".instructions").css('text-align','left');$(".instructions").css('width','50%');$(".instructions").css('margin','0 auto'); },
+    on_finish: function() { $(".fixation_gap").css('visibility','visible'); $(".box1").css('visibility','visible'); $(".box2").css('visibility','visible');$(".instructions").css('text-align','center');$(".instructions").css('width','100%');$(".instructions").css('margin','0'); },
     text: function() {
         return "<div id='break_block'><div id='time' style='text-align:center; font-size: 150%;'></div><div style='text-align:center;'>Nice job! You've completed the first half of the task!" +
                 "<br><p><b>Remember</b>: press the '<b>F</b>' key if the ''&#9679;'' is on the left. Press the '<b>J</b>' key if the ''&#9679;'' is on the right.</p> </div></div><script>display = document.querySelector('#time');startTimer(30, display);</"+"script>"
@@ -1311,7 +1311,10 @@
     
     on_finish: function() {
      //jsPsych.data.localSave('data.csv', 'csv');
-     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
+     $(".instructions").css('text-align','left');
+     $(".instructions").css('width','50%');
+     $(".instructions").css('margin','0 auto');
+     $('.instructions').text("Thank you for completing the task. Please hit the next button.");
      window.parent.postMessage(jsPsych.data.dataAsCSV(), "*");
      /*
       console.log('done');
