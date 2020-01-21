@@ -1,8 +1,37 @@
-  html, body {
+html, body {
   height: 100%;
   margin: 0;
-  }
-body { font-size: 125%; } /* global font size */
+}
+
+body { font-size: 70%; } /* global font size */
+
+.side-ind {
+  text-align: center; 
+  font-size: 80%; 
+  position: fixed; 
+  width: 100%; 
+  visibility: hidden;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+.jspsych-display-element {
+  width: 100%;
+}
+
+.jspsych_target {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+}
+
 .box1 {
   display: inline-block;
   vertical-align: middle;
@@ -10,13 +39,8 @@ body { font-size: 125%; } /* global font size */
   align-items: center;
   text-align: center;
   position: relative;
-  /*
-  width: 300px;
-  height: 400px;*/
-  
   width: 25%;
-  height: 65%;
-  
+  height: 50%;
   padding: 1px;
   margin: 2em;
   border: 3px solid grey;
@@ -28,31 +52,29 @@ body { font-size: 125%; } /* global font size */
   align-items: center;
   text-align: center;
   position: relative;
-  /*width: 300px;
-  height: 400px;*/
   width: 25%;
-  height: 65%;
+  height: 50%;
   padding: 1px;
   margin: 2em;
-  border: 3px solid grey
+  border: 3px solid grey;
 }
 .fixation_gap {
   display: inline-block;
   vertical-align: middle;
-  width: 5%;
-  height: 5%;
+  width: 10%;
+  height: 10%;
   padding: 1px;
   background: white;
   position: relative;
   text-align:center;
   font-size: 40px;
-  margin: 2em;
+  flex-shrink: 4;
+  margin: 0 auto;
 }
 .dot {
   display: inline-block;
   vertical-align: middle;
-  Text-align:center;
-  /*line-height: 400px;*/
+  text-align: center;
 }
 .text {
   vertical-align: middle;
@@ -60,17 +82,22 @@ body { font-size: 125%; } /* global font size */
 }
 .jspsych-display-element {
   min-height: 100%;
-  min-width:100%;
+  min-width: 100%;
   width:100%; !important;
-  overflow: hidden;
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .box1 #jspsych-single-stim-stimulus, .box2 #jspsych-single-stim-stimulus {
   width: 100%;
   height: 100%;
   display:flex;
-  justify-content:center;
-  align-items:center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 #go {
   width: 30%;
@@ -83,4 +110,22 @@ body { font-size: 125%; } /* global font size */
 }
 .jspsych-display-element h1 {
   width: 50%;
+}
+
+.instructions {
+  text-align: left;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 75%; 
+  } 
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 125%; 
+  } 
 }
