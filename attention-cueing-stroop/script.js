@@ -1367,8 +1367,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     
     on_finish: function() {
      //jsPsych.data.localSave('data.csv', 'csv');
-     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
-     window.parent.postMessage(jsPsych.data.dataAsJSON(), "*");
+     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.</p>");
+     window.parent.postMessage(JSON.stringify(ojsPsych.data.dataAsJSON()), "*");
      /*
       console.log('done');
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
