@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_block2 = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 4000,
+    timing_post_trial: 1,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log('done');
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
-      window.parent.postMessage(JSON.stringify(ojsPsych.data.dataAsJSON()), "*");
+      window.parent.postMessage(JSON.stringify(jsPsych.data.dataAsJSON()), "*");
 /*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);

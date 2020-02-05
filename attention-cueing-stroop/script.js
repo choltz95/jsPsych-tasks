@@ -10,7 +10,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
 
   var suicide_wordlist = ["suffocation", "gunshot", "funeral", "blood", "overdose", "noose", "corpse", "death", "dead", "die", "cutting", "dying", "suicide", "hanging", "killing", "deceased"];
   var negative_wordlist = ["hate", "vomit", "pathetic", "crying", "filthy","abuse", "cruel", "failure", "assault", "rejected", "bomb", "torture", "ashamed", "alone", "stupid", "worthless"];
-  var positive_wordlist = ["healthy", "attraction", "great", "paradise", "love", "bravery", "pleasure", "enthusiasm", "kiss", "strong", "smile", "happy", "passionate", "ecstatic", "laugh", "success"];
+  var positive_wordlist = ["healthy", "attraction", "great", "paradise", "love", "bravery", "pleasure", "enthusiasm", "kiss", "strong", "smile", "happy", "passion", "ecstatic", "laugh", "success"];
   var neutral_wordlist = ["statue", "folded", "image", "cheese", "horse", "foam", "table", "paper", "closet", "meter", "museum", "green", "frame", "double", "structure", "engine"];
 
   var test_wordlist =  suicide_wordlist.concat(negative_wordlist, positive_wordlist, neutral_wordlist)
@@ -1363,14 +1363,20 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   numpartitions = 15
 
   jsPsych.init({
-    timeline: [practice_timeline_complete_node, test_node1, test_node2],
-    
+    //timeline: [practice_timeline_complete_node, test_node1, test_node2],
+    timeline: [test_node2],
     on_finish: function() {
      //jsPsych.data.localSave('data.csv', 'csv');
-     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.</p>");
-     window.parent.postMessage(JSON.stringify(ojsPsych.data.dataAsJSON()), "*");
-     /*
-      console.log('done');
+    $(".side-ind").css('display','none'); 
+    $(".fixation_gap").css('display','none'); 
+    $(".box1").css('display','none'); 
+    $(".box2").css('display','none'); 
+    $(".spacer").css('display','none'); 
+    $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
+     window.parent.postMessage(JSON.stringify(jsPsych.data.dataAsJSON()), "*");
+     
+    console.log('done');
+      /*
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       
       var chunksize = Math.ceil(json_data.length/numpartitions);
