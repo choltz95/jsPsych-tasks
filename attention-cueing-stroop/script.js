@@ -1364,7 +1364,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
 
   jsPsych.init({
     //timeline: [practice_timeline_complete_node, test_node1, test_node2],
-    timeline: [test_node2],
+    timeline: [practice_timeline_complete_node],
     on_finish: function() {
      //jsPsych.data.localSave('data.csv', 'csv');
     $(".side-ind").css('display','none'); 
@@ -1373,7 +1373,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     $(".box2").css('display','none'); 
     $(".spacer").css('display','none'); 
     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
-     window.parent.postMessage(JSON.stringify(jsPsych.data.dataAsJSON()), "*");
+     window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON())), "*");
      
     console.log('done');
       /*

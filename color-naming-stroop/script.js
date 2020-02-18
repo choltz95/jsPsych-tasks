@@ -590,14 +590,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
   numpartitions = 7
   jsPsych.init({
-    timeline: [practice_timeline_complete_node, test_node],
-    
+    //timeline: [practice_timeline_complete_node, test_node],
+    timeline: [practice_timeline_complete_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
-      window.parent.postMessage(JSON.stringify(jsPsych.data.dataAsJSON()), "*");
+      window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON())), "*");
 /*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
