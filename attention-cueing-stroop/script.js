@@ -1363,8 +1363,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   numpartitions = 15
 
   jsPsych.init({
-    //timeline: [practice_timeline_complete_node, test_node1, test_node2],
-    timeline: [practice_timeline_complete_node],
+    timeline: [practice_timeline_complete_node, test_node1, test_node2],
+    //timeline: [practice_timeline_complete_node],
     on_finish: function() {
     console.log('done');
      //jsPsych.data.localSave('data.csv', 'csv');
