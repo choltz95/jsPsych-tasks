@@ -633,8 +633,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   /* start the experiment */
   jsPsych.init({
-    timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
-    //timeline: [practice_node],
+    //timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
+    timeline: [practice_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
