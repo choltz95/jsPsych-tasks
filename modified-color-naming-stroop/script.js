@@ -633,8 +633,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   /* start the experiment */
   jsPsych.init({
-    timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
-    //timeline: [practice_node],
+    //timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
+    timeline: [practice_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
@@ -643,7 +643,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
       var compressed_json_string = LZString.compressToUTF16(json_string);
-      window.parent.postMessage(compressed_json_string, "*");
+      //window.parent.postMessage(compressed_json_string, "*");
+      window.parent.postMessage(
+          {
+              event_id: 'stroop2',
+              data: compressed_json_string
+          }, 
+          "*"
+      ); 
     }
   });
 });

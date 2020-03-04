@@ -1378,7 +1378,14 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
      
       var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
       var compressed_json_string = LZString.compressToUTF16(json_string);
-      window.parent.postMessage(compressed_json_string, "*");
+      //window.parent.postMessage(compressed_json_string, "*");
+      window.parent.postMessage(
+          {
+              event_id: 'attention',
+              data: compressed_json_string
+          }, 
+          "*"
+      ); 
       /*
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       

@@ -600,7 +600,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
       //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
       var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
       var compressed_json_string = LZString.compressToUTF16(json_string);
-      window.parent.postMessage(compressed_json_string, "*");
+      //window.parent.postMessage(compressed_json_string, "*");
+      window.parent.postMessage(
+          {
+              event_id: 'stroop1',
+              data: compressed_json_string
+          }, 
+          "*"
+      ); 
 
 /*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
