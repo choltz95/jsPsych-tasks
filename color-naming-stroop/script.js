@@ -597,7 +597,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log('done');
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
-      window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
+      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
+      var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
+      var compressed_json_string = LZString.compressToUTF16(json_string);
+      window.parent.postMessage(compressed_json_string, "*");
+
 /*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
