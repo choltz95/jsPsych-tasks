@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
       $('.jspsych-display-element').append("<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>");
-      window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON())), "*");
+      window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON()).replace(/(\r\n|\n|\r)/gm, "")), "*");
     }
   });
 });

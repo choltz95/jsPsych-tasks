@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log('done');
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
-      window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON())), "*");
+      window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON()).replace(/(\r\n|\n|\r)/gm, "")), "*");
 /*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);

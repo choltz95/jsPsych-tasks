@@ -1373,7 +1373,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     $(".box2").css('display','none'); 
     $(".spacer").css('display','none'); 
     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
-     window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON())), "*");
+     window.parent.postMessage(encodeURIComponent(JSON.stringify(jsPsych.data.dataAsJSON()).replace(/(\r\n|\n|\r)/gm, "")), "*");
      
     console.log('done');
       /*
