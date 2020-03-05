@@ -1397,7 +1397,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
         window.parent.postMessage(
             {
                 event_id: 'Attention-'.concat(i.toString()),
-                data: compressed_json_string
+                data: json_string
             }, 
             "*"
         ); 

@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         window.parent.postMessage(
             {
                 event_id: 'Stroop1-'.concat(i.toString()),
-                data: compressed_json_string
+                data: json_string
             }, 
             "*"
         ); 
