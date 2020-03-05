@@ -1363,8 +1363,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   numpartitions = 15
 
   jsPsych.init({
-    timeline: [practice_timeline_complete_node, test_node1, test_node2],
-    //timeline: [practice_timeline_complete_node],
+    //timeline: [practice_timeline_complete_node, test_node1, test_node2],
+    timeline: [practice_timeline_complete_node],
     on_finish: function() {
     console.log('done');
      //jsPsych.data.localSave('data.csv', 'csv');
@@ -1376,8 +1376,36 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     $('.jspsych_target').text("Thank you for completing the task. Please hit the next button.");
 //    window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
      
-      var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      var compressed_json_string = LZString.compressToUTF16(json_string);
+      var numpartitions = 5
+
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON());
+      var chunksize = Math.ceil(json_data.length/numpartitions);
+
+      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      
+      var json_datas = [];
+      while (json_data.length > 0){
+        json_datas.push(json_data.splice(0, chunksize));
+      }
+      
+      var json_data_strs = []
+      for(var i = 1; i <= json_datas.length; i++) {
+        findAndRemove(json_datas[i],'block','fixation');
+        var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
+        //json_data_strs.push()
+        window.parent.postMessage(
+            {
+                event_id: 'Attention-'.concat(i.toString()),
+                data: compressed_json_string
+            }, 
+            "*"
+        ); 
+      }
+
+/*
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
       //window.parent.postMessage(compressed_json_string, "*");
       window.parent.postMessage(
           {
@@ -1385,7 +1413,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
               data: compressed_json_string
           }, 
           "*"
-      ); 
+      ); */
       /*
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       

@@ -633,16 +633,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   /* start the experiment */
   jsPsych.init({
-    timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
-    //timeline: [practice_node],
+    //timeline: [practice_node,practice_errcheck_node,practice_debrief_node,practice2_node, practice_errcheck2_node, practice_debrief2_node, test_node],
+    timeline: [practice_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
       $('.jspsych-display-element').append("<div style='text-align:center;'><p>Thank you for completing the task. Please hit the next button.</p></div>");
       //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
 
-      var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      var compressed_json_string = LZString.compressToUTF16(json_string);
+      var numpartitions = 5
+
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON());
+      var chunksize = Math.ceil(json_data.length/numpartitions);
+
+      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      
+      var json_datas = [];
+      while (json_data.length > 0){
+        json_datas.push(json_data.splice(0, chunksize));
+      }
+      
+      var json_data_strs = []
+      for(var i = 1; i <= json_datas.length; i++) {
+        findAndRemove(json_datas[i],'block','fixation');
+        var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
+        //json_data_strs.push()
+        window.parent.postMessage(
+            {
+                event_id: 'Stroop2-'.concat(i.toString()),
+                data: compressed_json_string
+            }, 
+            "*"
+        ); 
+      }
+
+/*
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
       //window.parent.postMessage(compressed_json_string, "*");
       window.parent.postMessage(
           {
@@ -650,7 +678,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
               data: compressed_json_string
           }, 
           "*"
-      ); 
+      ); */
     }
   });
 });

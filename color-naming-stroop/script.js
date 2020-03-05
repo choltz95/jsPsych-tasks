@@ -590,39 +590,50 @@ document.addEventListener('DOMContentLoaded', (event) => {
   idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
   numpartitions = 7
   jsPsych.init({
-    timeline: [practice_timeline_complete_node, test_node],
-    //timeline: [practice_timeline_complete_node],
+    //timeline: [practice_timeline_complete_node, test_node],
+    timeline: [practice_timeline_complete_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
       $('.jspsych_target').append("<p>Thank you for completing the task. Please hit the next button.</p>");
 
-      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
-      var json_string = JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      var compressed_json_string = LZString.compressToUTF16(json_string);
-      //window.parent.postMessage(compressed_json_string, "*");
-      window.parent.postMessage(
-          {
-              event_id: 'stroop1',
-              data: compressed_json_string
-          }, 
-          "*"
-      ); 
+      var numpartitions = 5
 
-/*      
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
+
+      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
+      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      
       var json_datas = [];
       while (json_data.length > 0){
         json_datas.push(json_data.splice(0, chunksize));
       }
       
-      json_data_strs = []
-      for(var i = 0; i < json_datas.length; i++) {
+      var json_data_strs = []
+      for(var i = 1; i <= json_datas.length; i++) {
         findAndRemove(json_datas[i],'block','fixation');
-        json_data_strs.push(JSON.stringify(json_datas[i]))
+        var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
+        //json_data_strs.push()
+        window.parent.postMessage(
+            {
+                event_id: 'Stroop1-'.concat(i.toString()),
+                data: compressed_json_string
+            }, 
+            "*"
+        ); 
       }
-      
+
+      //var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
+      /*window.parent.postMessage(
+          {
+              event_id: 'stroop1',
+              data: compressed_json_string
+          }, 
+          "*"
+      ); */
+
+/*            
       var responseid = -1
       var ridqid = 1913
       var url = `${base_url}3808247/surveyresponse.jsonp?_method=PUT&api_token=${api_key}&api_token_secret=${api_secret}&data[${ridqid}][value]=${rid}`;
