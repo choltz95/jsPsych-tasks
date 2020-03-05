@@ -590,8 +590,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
   numpartitions = 7
   jsPsych.init({
-    //timeline: [practice_timeline_complete_node, test_node],
-    timeline: [practice_timeline_complete_node],
+    timeline: [practice_timeline_complete_node, test_node],
+    //timeline: [practice_timeline_complete_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
@@ -611,13 +611,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
       
       var json_data_strs = []
-      for(var i = 1; i <= json_datas.length; i++) {
+      for(var i = 0; i < json_datas.length; i++) {
         findAndRemove(json_datas[i],'block','fixation');
         var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
         //json_data_strs.push()
         window.parent.postMessage(
             {
-                event_id: 'Stroop1-'.concat(i.toString()),
+                event_id: 'Stroop1-'.concat((i+1).toString()),
                 data: json_string
             }, 
             "*"

@@ -1363,8 +1363,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   numpartitions = 15
 
   jsPsych.init({
-    //timeline: [practice_timeline_complete_node, test_node1, test_node2],
-    timeline: [practice_timeline_complete_node],
+    timeline: [practice_timeline_complete_node, test_node1, test_node2],
+    //timeline: [practice_timeline_complete_node],
     on_finish: function() {
     console.log('done');
      //jsPsych.data.localSave('data.csv', 'csv');
@@ -1390,13 +1390,13 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
       }
       
       var json_data_strs = []
-      for(var i = 1; i <= json_datas.length; i++) {
+      for(var i = 0; i < json_datas.length; i++) {
         findAndRemove(json_datas[i],'block','fixation');
         var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
         //json_data_strs.push()
         window.parent.postMessage(
             {
-                event_id: 'Attention-'.concat(i.toString()),
+                event_id: 'Attention-'.concat((i+1).toString()),
                 data: json_string
             }, 
             "*"
