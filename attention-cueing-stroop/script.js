@@ -1359,15 +1359,15 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   /* start the experiment */
   // Surveygizmo data ids
   //ids = [13414,13415,13416,13417,13418]
-  idds = [1542, 1718, 1719, 1720, 1721,1807,1808,1809,1811,1812,1813,1814,1815,1816,1817]
-  numpartitions = 15
+  //idds = [1542, 1718, 1719, 1720, 1721,1807,1808,1809,1811,1812,1813,1814,1815,1816,1817]
+  //numpartitions = 15
 
   jsPsych.init({
     timeline: [practice_timeline_complete_node, test_node1, test_node2],
     //timeline: [practice_timeline_complete_node],
     on_finish: function() {
     console.log('done');
-     //jsPsych.data.localSave('data.csv', 'csv');
+    //jsPsych.data.localSave('data.csv', 'csv');
     $(".side-ind").css('display','none'); 
     $(".fixation_gap").css('display','none'); 
     $(".box1").css('display','none'); 
@@ -1382,18 +1382,16 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
       var chunksize = Math.ceil(json_data.length/numpartitions);
 
       //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
-      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      //var json_data = JSON.parse(jsPsych.data.dataAsJSON())
       
       var json_datas = [];
       while (json_data.length > 0){
         json_datas.push(json_data.splice(0, chunksize));
       }
       
-      var json_data_strs = []
       for(var i = 0; i < json_datas.length; i++) {
         findAndRemove(json_datas[i],'block','fixation');
         var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
-        //json_data_strs.push()
         window.parent.postMessage(
             {
                 event_id: 'Attention-'.concat((i+1).toString()),

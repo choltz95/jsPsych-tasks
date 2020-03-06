@@ -587,11 +587,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   /* start the experiment */
   // Surveygizmo data ids
-  idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
-  numpartitions = 7
+  //idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
+  //numpartitions = 7
   jsPsych.init({
-    timeline: [practice_timeline_complete_node, test_node],
-    //timeline: [practice_timeline_complete_node],
+    //timeline: [practice_timeline_complete_node, test_node],
+    timeline: [practice_timeline_complete_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
@@ -603,23 +603,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var chunksize = Math.ceil(json_data.length/numpartitions);
 
       //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
-      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
+      //var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       
       var json_datas = [];
       while (json_data.length > 0){
         json_datas.push(json_data.splice(0, chunksize));
       }
       
-      var json_data_strs = []
       for(var i = 0; i < json_datas.length; i++) {
         findAndRemove(json_datas[i],'block','fixation');
         var json_string = JSON.stringify(json_datas[i]).replace(/(\r\n|\n|\r|\\n)/gm, "");
-        //json_data_strs.push()
         window.parent.postMessage(
             {
                 event_id: 'Stroop1-'.concat((i+1).toString()),
                 data: json_string
-            }, 
+            },
             "*"
         ); 
       }
