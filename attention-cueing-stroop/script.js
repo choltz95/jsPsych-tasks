@@ -328,7 +328,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   var test_debrief_block = {
     type: "text",
     cont_key: null,
-    timeLeft: 1,
+    timeLeft: 0,
     display_element: $('.instructions'),
     text: function() {
       $(".box1").remove();
@@ -1346,7 +1346,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   test_timeline2.push(test_block4);
   test_timeline_rand2 = jsPsych.randomization.repeat(test_timeline2, 1);
   
-  test_timeline_rand2.push(test_debrief_block);
+  //test_timeline_rand2.push(test_debrief_block);
 
   var test_node2 = {
     type: "single-stim",
@@ -1368,6 +1368,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     on_finish: function() {
     console.log('done');
     //jsPsych.data.localSave('data.csv', 'csv');
+
+    $(".dot").css('display','none');
     $(".side-ind").css('display','none'); 
     $(".fixation_gap").css('display','none'); 
     $(".box1").css('display','none'); 

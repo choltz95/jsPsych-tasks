@@ -590,8 +590,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   //idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
   //numpartitions = 7
   jsPsych.init({
-    //timeline: [practice_timeline_complete_node, test_node],
-    timeline: [practice_timeline_complete_node],
+    timeline: [practice_timeline_complete_node, test_node],
+    //timeline: [practice_timeline_complete_node],
     on_finish: function() {
       //jsPsych.data.localSave('data.csv', 'csv');
       console.log('done');
