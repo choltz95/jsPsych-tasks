@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_block2 = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 1,
+    timing_post_trial: 4000,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   test_timeline.push(test_block1);
   //test_timeline.push(test_break_block);
   test_timeline.push(test_block2);
-  test_timeline.push(test_debrief_block);
+  //test_timeline.push(test_debrief_block);
   
   var test_node = {
     type: "single-stim",
