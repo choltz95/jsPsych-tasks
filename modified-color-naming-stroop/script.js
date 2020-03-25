@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-
   var colors = ["blue", "red"];
   var practice_wordlist = ["ZZZZZ","BBBBB","VVVVV","WWWWW","SSSSS","NNNNN","QQQQQ","UUUUU","HHHHH","IIIII","DDDDD","PPPPP"];
   var practice2_wordlist = ["CCCCC","EEEEE","XXXXX","MMMMM","AAAAA","LLLLL","RRRRR","TTTTT","KKKKK","GGGGG","OOOOO","YYYYY"];
@@ -15,6 +14,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_trial_index = 0;
   var tti = 0;
   var test_flag = true;
+
+  var post_trial_gap_time = 1000; // 500 ms + 500 ms
+  var fixation_display_time = 500;
+  var post_fixation_gap_time = 0;
 
   /* define instructions block */
   var instructions_block = {
@@ -36,8 +39,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     stimulus:"<h1>&#10010;<h1>",
     is_html: true,
-    timing_response: 500,
-    timing_post_trial: 0,
+    timing_response: fixation_display_time,
+    timing_post_trial: post_fixation_gap_time,
     response_ends_trial: false,
     data:{
       block: 'fixation',
@@ -137,7 +140,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData();
@@ -171,7 +174,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData();
@@ -473,7 +476,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log('practice2');
         console.log(perror_rate);
 
-        var d = jsPsych.data.getLastTrialData(); //most recent trial is bad keys
+        var d = jsPsych.data.getLastTrialData(); //most recent trial is incorrect
         if(d.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('1') && perror_rate < 0.75){
             console.log('accept');
             return true;
@@ -488,7 +491,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -523,7 +526,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -558,7 +561,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     choices: ['f','j'],
     timing_response: -1,
-    timing_post_trial: 1000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       test_trial_index++;
@@ -665,18 +668,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             "*"
         ); 
       }
-
-/*
-      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
-      var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      //window.parent.postMessage(compressed_json_string, "*");
-      window.parent.postMessage(
-          {
-              event_id: 'stroop2',
-              data: compressed_json_string
-          }, 
-          "*"
-      ); */
     }
   });
 });

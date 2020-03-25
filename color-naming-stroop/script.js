@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  /* switch to oauth */
-  /* survey id: 3808247 */
-  var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
-  var api_secret = "A9UlsF6.fbaTE";
-  var base_url = "https://restapi.surveygizmo.com/v5/survey/";
-  //https://restapi.surveygizmo.com/v5/survey/3808247/surveypage/1/surveyquestion/1415/surveyoption?_method=PUT&title=data&value='{rvar:test}'&api_token=11082366813cdc167d41fea137939cb35142673bc71a98d823&api_token_secret=A9UlsF6.fbaTE
-
   var colors = ["blue", "red"];
   var practice_wordlist = ["ZZZZZ","BBBBB","VVVVV","WWWWW","SSSSS","NNNNN","QQQQQ","UUUUU","HHHHH","IIIII","DDDDD","PPPPP"];
   var practice_colors = jsPsych.randomization.repeat(colors, 6);
@@ -21,8 +14,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_stimuli2 = []; // block 2
   var trial_index = 0;
 
-  /* define instructions block */
+  var post_trial_gap_time = 4000;
+  var fixation_display_time = 1000;
+  var post_cross_gap_time = 1000;
 
+  /* define instructions block */
   var instructions_block = {
     type: "text",
     cont_key: ['f','j'],
@@ -34,7 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       "<p>Your task is to indicate the color of each word as quickly and as accurately as you can. Try not to make mistakes, but try to be fast. Your reactions will be timed.</p>" +
     
       "<p>Press the '<font color='red'>F</font>' or '<font color='blue'>J</font>' key to start...</p>",
-    timing_post_trial: 4000
+    timing_post_trial: post_trial_gap_time
   };
 
 
@@ -80,8 +76,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     type: "single-stim",
     stimulus:"<h1>&#10010;<h1>",
     is_html: true,
-    timing_response: 1000,
-    timing_post_trial: 1000,
+    timing_response: fixation_display_time,
+    timing_post_trial: post_cross_gap_time,
     response_ends_trial: false,
     data:{
       block: 'fixation'
@@ -179,7 +175,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var practice_block = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 4000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -207,7 +203,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var practice2_block = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 4000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -496,7 +492,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_block1 = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 4000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -526,7 +522,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var test_block2 = {
     type: "single-stim",
     choices: ['f','j'],
-    timing_post_trial: 4000,
+    timing_post_trial: post_trial_gap_time,
     on_finish: function(data){
       trial_index++;
       d = jsPsych.data.getLastTrialData()
@@ -582,13 +578,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     timeline: test_timeline
   }
 
-  //var rid = getParameterByName('rid');
-  //console.log(rid);
 
-  /* start the experiment */
-  // Surveygizmo data ids
-  //idds = [1540, 1543, 1544, 1545, 1546,1805,1806]
-  //numpartitions = 7
   jsPsych.init({
     timeline: [practice_timeline_complete_node, test_node],
     //timeline: [practice_timeline_complete_node],
@@ -602,9 +592,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
 
-      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
-      //var json_data = JSON.parse(jsPsych.data.dataAsJSON());
-      
       var json_datas = [];
       while (json_data.length > 0){
         json_datas.push(json_data.splice(0, chunksize));
@@ -620,59 +607,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             },
             "*"
         ); 
-      }
-
-      //var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      /*window.parent.postMessage(
-          {
-              event_id: 'stroop1',
-              data: compressed_json_string
-          }, 
-          "*"
-      ); */
-
-/*            
-      var responseid = -1
-      var ridqid = 1913
-      var url = `${base_url}3808247/surveyresponse.jsonp?_method=PUT&api_token=${api_key}&api_token_secret=${api_secret}&data[${ridqid}][value]=${rid}`;
-
-      $.ajax({
-          url: url,
-          type: 'PUT',
-          jsonp: "callback",
-          dataType: "jsonp",
-          success: function( response ) {
-            console.log(response);
-            responseid = response['data']['id']; // server response
-            console.log(responseid);
-            
-              //for(var i = 0; i<numpartitions; i++){
-              var i = 0;
-              (testt = function() {
-                  d = encodeURIComponent(json_data_strs[i]);
-                  //var url = `${base_url}3808247/surveypage/1/surveyquestion/${idds[i]}.jsonp?_method=POST&api_token=${api_key}&api_token_secret=${api_secret}&properties[defaulttext]=${d}`;
-                  var url = `${base_url}3808247/surveyresponse/${responseid}.jsonp?_method=POST&api_token=${api_key}&api_token_secret=${api_secret}&data[${idds[i]}][value]=${d}`;
-      
-                  $.ajax({
-                      async: true,
-                      url: url,
-                      type: 'POST',
-                      jsonp: "callback",
-                      dataType: "jsonp",
-                      //data: {value: encodeURIComponent(json_data_strs[i])},
-                      success: function( response ) {
-                        console.log(response);
-                        i++;
-                        if(i < numpartitions) { setTimeout(testt(),1200);}
-                        else { $("#go").css("background", "green"); }
-                          //rid = response['data']['id']; // server response
-                      }
-                  });
-                })();
-            //}
-          }
-      });*/
-      
+      }     
     }
   });
 });

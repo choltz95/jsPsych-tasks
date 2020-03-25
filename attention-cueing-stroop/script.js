@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-
-var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
-  var api_secret = "A9UlsF6.fbaTE";
-  var base_url = "https://restapi.surveygizmo.com/v5/survey/";
-  //https://restapi.surveygizmo.com/v5/survey/3808247/surveypage/1/surveyquestion/1415/surveyoption?_method=PUT&title=data&value='{rvar:test}'&api_token=11082366813cdc167d41fea137939cb35142673bc71a98d823&api_token_secret=A9UlsF6.fbaTE
-
   var practice_wordlist = ["ZZZZZ","BBBBB","VVVVV","WWWWW","SSSSS","NNNNN","QQQQQ","UUUUU","HHHHH","IIIII","DDDDD","PPPPP"];
   var practice_wordlist2 = ["CCCCC","EEEEE","XXXXX","MMMMM","AAAAA","LLLLL","RRRRR","TTTTT","KKKKK","GGGGG","OOOOO","YYYYY"];
 
@@ -24,6 +18,10 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   var test_stimuli3 = []; // block 3
   var test_stimuli4 = []; // block 4
   var trial_index = 0;
+
+  var post_trial_gap_time = 1000;
+  var stimulus_display_time = 1000;
+  var fixation_display_time = 50;
 
   /* define instructions block */
   var instructions_block = {
@@ -64,7 +62,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     display_element: $('.box1'),
     stimulus:"",
     is_html: true,
-    timing_response: 1000,
+    timing_response: post_trial_gap_time,
     timing_post_trial: 0,
     response_ends_trial: false,
     on_trial_start: function() { 
@@ -89,7 +87,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     on_finish: function() { 
       $(".fixation_gap").css('visibility','visible'); 
     },
-    timing_response: 1000,
+    timing_response: post_trial_gap_time,
     timing_post_trial: 0,
     response_ends_trial: false,
     data:{
@@ -160,7 +158,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     } else { wp = "right";}
     var stim = {
       is_html: true,
-      timing_response: 1000,
+      timing_response: stimulus_display_time,
       timing_post_trial: 50,
       response_ends_trial: false,
       display_element: $('.box' + rand1),
@@ -195,7 +193,7 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     } else { wp = "right";}
     var stim = {
       is_html: true,
-      timing_response: 1000,
+      timing_response: stimulus_display_time,
       timing_post_trial: 50,
       response_ends_trial: false,
       display_element: $('.box' + rand1),
@@ -620,8 +618,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=0; i<4; i++) {
     var suicide_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + suicide_wordlist[i] + "</h3></span>" + "<span><h3>" + suicide_wordlist[i] + "</h3></span></div>",
@@ -643,8 +641,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=0; i<4; i++) {
     var neutral_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + neutral_wordlist[i] + "</h3></span>" + "<span><h3>" + neutral_wordlist[i] + "</h3></span></div>",
@@ -666,8 +664,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=0; i<4; i++) {
     var positive_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + positive_wordlist[i] + "</h3></span>" + "<span><h3>" + positive_wordlist[i] + "</h3></span></div>",
@@ -689,8 +687,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=0; i<4; i++) {
     var negative_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + negative_wordlist[i] + "</h3></span>" + "<span><h3>" + negative_wordlist[i] + "</h3></span></div>",
@@ -793,8 +791,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=4; i<8; i++) {
     var suicide_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + suicide_wordlist[i] + "</h3></span>" + "<span><h3>" + suicide_wordlist[i] + "</h3></span></div>",
@@ -816,8 +814,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=4; i<8; i++) {
     var neutral_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + neutral_wordlist[i] + "</h3></span>" + "<span><h3>" + neutral_wordlist[i] + "</h3></span></div>",
@@ -839,8 +837,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=4; i<8; i++) {
     var positive_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + positive_wordlist[i] + "</h3></span>" + "<span><h3>" + positive_wordlist[i] + "</h3></span></div>",
@@ -862,8 +860,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=4; i<8; i++) {
     var negative_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + negative_wordlist[i] + "</h3></span>" + "<span><h3>" + negative_wordlist[i] + "</h3></span></div>",
@@ -966,8 +964,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=8; i<12; i++) {
     var suicide_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + suicide_wordlist[i] + "</h3></span>" + "<span><h3>" + suicide_wordlist[i] + "</h3></span></div>",
@@ -989,8 +987,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=8; i<12; i++) {
     var neutral_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + neutral_wordlist[i] + "</h3></span>" + "<span><h3>" + neutral_wordlist[i] + "</h3></span></div>",
@@ -1012,8 +1010,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=8; i<12; i++) {
     var positive_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + positive_wordlist[i] + "</h3></span>" + "<span><h3>" + positive_wordlist[i] + "</h3></span></div>",
@@ -1035,8 +1033,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=8; i<12; i++) {
     var negative_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + negative_wordlist[i] + "</h3></span>" + "<span><h3>" + negative_wordlist[i] + "</h3></span></div>",
@@ -1139,8 +1137,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=12; i<16; i++) {
     var suicide_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + suicide_wordlist[i] + "</h3></span>" + "<span><h3>" + suicide_wordlist[i] + "</h3></span></div>",
@@ -1162,8 +1160,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=12; i<16; i++) {
     var neutral_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + neutral_wordlist[i] + "</h3></span>" + "<span><h3>" + neutral_wordlist[i] + "</h3></span></div>",
@@ -1185,8 +1183,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=12; i<16; i++) {
     var positive_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + positive_wordlist[i] + "</h3></span>" + "<span><h3>" + positive_wordlist[i] + "</h3></span></div>",
@@ -1208,8 +1206,8 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
   for(var i=12; i<16; i++) {
     var negative_stim = {
       is_html: true,
-      timing_response: 1000,
-      timing_post_trial: 50,
+      timing_response: stimulus_display_time,
+      timing_post_trial: fixation_display_time,
       response_ends_trial: false,
       display_element: $('.box1'),
       stimulus: "<div class='text'><span><h3>" + negative_wordlist[i] + "</h3></span>" + "<span><h3>" + negative_wordlist[i] + "</h3></span></div>",
@@ -1353,15 +1351,6 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
     timeline: test_timeline_rand2
   }
 
-  //var rid = getParameterByName('rid');
-  //console.log(rid);
-
-  /* start the experiment */
-  // Surveygizmo data ids
-  //ids = [13414,13415,13416,13417,13418]
-  //idds = [1542, 1718, 1719, 1720, 1721,1807,1808,1809,1811,1812,1813,1814,1815,1816,1817]
-  //numpartitions = 15
-
   jsPsych.init({
     timeline: [practice_timeline_complete_node, test_node1, test_node2],
     //timeline: [practice_timeline_complete_node],
@@ -1383,9 +1372,6 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
       var json_data = JSON.parse(jsPsych.data.dataAsJSON());
       var chunksize = Math.ceil(json_data.length/numpartitions);
 
-      //window.parent.postMessage(encodeURIComponent(JSON.stringify(JSON.parse(jsPsych.data.dataAsJSON())).replace(/(\r\n|\n|\r|\\n)/gm, "")), "*");
-      //var json_data = JSON.parse(jsPsych.data.dataAsJSON())
-      
       var json_datas = [];
       while (json_data.length > 0){
         json_datas.push(json_data.splice(0, chunksize));
@@ -1402,74 +1388,6 @@ var api_key = "11082366813cdc167d41fea137939cb35142673bc71a98d823";
             "*"
         ); 
       }
-
-/*
-      var json_data = JSON.parse(jsPsych.data.dataAsJSON())
-      var json_string = JSON.stringify(json_data).replace(/(\r\n|\n|\r|\\n)/gm, "");
-      //window.parent.postMessage(compressed_json_string, "*");
-      window.parent.postMessage(
-          {
-              event_id: 'attention',
-              data: compressed_json_string
-          }, 
-          "*"
-      ); */
-      /*
-      var json_data = JSON.parse(jsPsych.data.dataAsJSON());
-      
-      var chunksize = Math.ceil(json_data.length/numpartitions);
-      var json_datas = [];
-      while (json_data.length > 0){
-        json_datas.push(json_data.splice(0, chunksize));
-      }
-      
-      json_data_strs = []
-      for(var i = 0; i < json_datas.length; i++) {
-        findAndRemove(json_datas[i],'block','fixation');
-        json_data_strs.push(JSON.stringify(json_datas[i]))
-      }
-      
-      var responseid = -1
-      var ridqid = 1913
-      var url = `${base_url}3808247/surveyresponse.jsonp?_method=PUT&api_token=${api_key}&api_token_secret=${api_secret}&data[${ridqid}][value]=${rid}`;
-
-      $.ajax({
-          url: url,
-          type: 'PUT',
-          jsonp: "callback",
-          dataType: "jsonp",
-          success: function( response ) {
-            console.log(response);
-            responseid = response['data']['id']; // server response
-            console.log(responseid)
-            
-              //for(var i = 0; i<numpartitions; i++){
-              var i = 0;
-              (testt = function() {
-                  d = encodeURIComponent(json_data_strs[i]);
-                  //var url = `${base_url}3808247/surveypage/1/surveyquestion/${idds[i]}.jsonp?_method=POST&api_token=${api_key}&api_token_secret=${api_secret}&properties[defaulttext]=${d}`;
-                  var url = `${base_url}3808247/surveyresponse/${responseid}.jsonp?_method=POST&api_token=${api_key}&api_token_secret=${api_secret}&data[${idds[i]}][value]=${d}`;
-      
-                  $.ajax({
-                      async: true,
-                      url: url,
-                      type: 'POST',
-                      jsonp: "callback",
-                      dataType: "jsonp",
-                      //data: {value: encodeURIComponent(json_data_strs[i])},
-                      success: function( response ) {
-                        console.log(response);
-                        i++;
-                        if(i < numpartitions) { setTimeout(testt(),1200);}
-                        else { $("#go").css("background", "green"); }
-                          //rid = response['data']['id']; // server response
-                      }
-                  });
-                })();
-            //}
-          }
-      }); */
     }
   });
-      //the event occurred
 })
